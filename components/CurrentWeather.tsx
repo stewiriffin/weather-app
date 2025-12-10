@@ -27,12 +27,12 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
       <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 border border-white/20 shadow-2xl">
         {/* City and Date */}
         <div className="text-center mb-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2" aria-label={`Weather in ${data.name}, ${data.sys.country}`}>
             {data.name}, {data.sys.country}
           </h1>
-          <p className="text-white/70 text-lg">
+          <time dateTime={new Date(data.dt * 1000).toISOString()} className="text-white/70 text-lg">
             {format(new Date(data.dt * 1000), 'EEEE, MMMM d, yyyy • h:mm a')}
-          </p>
+          </time>
         </div>
 
         {/* Main Weather Display */}
@@ -40,20 +40,20 @@ export default function CurrentWeather({ data }: CurrentWeatherProps) {
           <div className="flex items-center">
             <Image
               src={getWeatherIconUrl(data.weather[0].icon)}
-              alt={data.weather[0].description}
+              alt={`${data.weather[0].description} weather icon`}
               width={120}
               height={120}
               className="w-32 h-32"
             />
           </div>
           <div className="text-center md:text-left">
-            <div className="text-7xl md:text-8xl font-bold text-white mb-2">
+            <div className="text-7xl md:text-8xl font-bold text-white mb-2" aria-label={`Temperature ${temp} degrees`}>
               {temp}°
             </div>
-            <p className="text-2xl text-white/90 capitalize mb-1">
+            <p className="text-2xl text-white/90 capitalize mb-1" aria-label={`Weather condition: ${data.weather[0].description}`}>
               {data.weather[0].description}
             </p>
-            <p className="text-white/70">
+            <p className="text-white/70" aria-label={`Feels like ${feelsLike} degrees`}>
               Feels like {feelsLike}°
             </p>
           </div>

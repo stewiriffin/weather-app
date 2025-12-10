@@ -38,11 +38,15 @@ export default function SearchBox({ onSearch, onLocationSearch, isLoading }: Sea
               onChange={(e) => setCity(e.target.value)}
               placeholder="Search for a city..."
               disabled={isLoading}
+              aria-label="Search for a city"
+              aria-describedby="search-description"
               className="w-full px-6 py-4 pr-14 text-lg rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             />
+            <span id="search-description" className="sr-only">Enter a city name to get weather information</span>
             <button
               type="submit"
               disabled={isLoading || !city.trim()}
+              aria-label="Search for weather"
               className="absolute right-2 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-white/20 hover:bg-white/30 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
@@ -56,8 +60,8 @@ export default function SearchBox({ onSearch, onLocationSearch, isLoading }: Sea
             type="button"
             onClick={onLocationSearch}
             disabled={isLoading}
-            className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-white"
-            title="Use my location"
+            aria-label="Use my current location"
+            className="px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 text-white focus:outline-none focus:ring-2 focus:ring-white/50"
           >
             <MapPin className="w-5 h-5" />
             <span className="hidden sm:inline">Use Location</span>
@@ -82,7 +86,8 @@ export default function SearchBox({ onSearch, onLocationSearch, isLoading }: Sea
               transition={{ delay: index * 0.1 }}
               onClick={() => handleRecentSearch(searchCity)}
               disabled={isLoading}
-              className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label={`Search for ${searchCity}`}
+              className="px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm hover:bg-white/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-white/50"
             >
               {searchCity}
             </motion.button>

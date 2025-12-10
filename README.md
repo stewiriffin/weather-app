@@ -66,31 +66,71 @@ Weather/
 ├── app/
 │   ├── globals.css          # Global styles
 │   ├── layout.tsx            # Root layout with metadata
+│   ├── manifest.ts           # PWA manifest configuration
 │   └── page.tsx              # Main page with weather dashboard
 ├── components/
-│   ├── SearchBox.tsx         # City search input component
+│   ├── AirQuality.tsx        # Air quality display component
 │   ├── CurrentWeather.tsx    # Current weather display
+│   ├── ErrorBoundary.tsx     # Error boundary component
 │   ├── Forecast.tsx          # 5-day forecast component
+│   ├── HourlyForecast.tsx    # Hourly forecast component
+│   ├── SearchBox.tsx         # City search input component
+│   ├── TemperatureChart.tsx  # Temperature chart component
+│   ├── UnitToggle.tsx        # Temperature unit toggle
+│   ├── WeatherBackground.tsx # Dynamic weather background
 │   └── WeatherSkeleton.tsx   # Loading skeleton component
 ├── lib/
-│   └── weather.ts            # Weather API utility functions
+│   ├── cache.ts              # API response caching
+│   ├── env.ts                # Environment variable validation
+│   ├── utils.ts              # Utility functions
+│   ├── weather.ts            # Weather API utility functions
+│   └── WeatherContext.tsx    # Weather context provider
 ├── types/
 │   └── weather.ts            # TypeScript interfaces
-├── public/                   # Static assets
+├── __tests__/                # Test files
+│   ├── components/           # Component tests
+│   └── lib/                  # Library tests
+├── public/                   # Static assets (PWA icons go here)
 ├── .env.local                # Environment variables (with API key)
 ├── .env.local.example        # Example environment file
+├── jest.config.js            # Jest configuration
+├── jest.setup.js             # Jest setup file
 ├── package.json              # Project dependencies
+├── PWA_ICONS.md              # PWA icons setup guide
 └── README.md                 # This file
 ```
 
+## Testing
+
+The project includes unit tests using Jest and React Testing Library.
+
+1. **Run tests**:
+   ```bash
+   npm test
+   ```
+
+2. **Run tests in watch mode**:
+   ```bash
+   npm run test:watch
+   ```
+
+3. **Generate coverage report**:
+   ```bash
+   npm run test:coverage
+   ```
+
 ## Build for Production
 
-1. **Create a production build**:
+1. **Set up PWA icons** (see `PWA_ICONS.md` for details):
+   - Create `icon-192x192.png` and `icon-512x512.png`
+   - Place them in the `public/` directory
+
+2. **Create a production build**:
    ```bash
    npm run build
    ```
 
-2. **Start the production server**:
+3. **Start the production server**:
    ```bash
    npm start
    ```
@@ -101,6 +141,9 @@ Weather/
 - Clean input field with search icon
 - Loading state during API requests
 - Form validation
+- Recent searches with localStorage persistence
+- Geolocation support
+- Full keyboard navigation and ARIA labels
 
 ### CurrentWeather Component
 - Large temperature display
@@ -109,17 +152,31 @@ Weather/
 - Feels-like temperature
 - High/Low temperatures
 - Weather details grid (wind speed, humidity, pressure, visibility)
+- Accessible with proper ARIA labels
 
 ### Forecast Component
 - 5-day weather forecast
+- Hourly forecast (next 24 hours)
 - Daily temperature predictions
 - Weather icons and descriptions
 - High/Low temperatures for each day
+- Tabbed interface with smooth animations
 
-### WeatherSkeleton Component
-- Animated loading skeleton
-- Matches the layout of actual weather data
-- Provides visual feedback during data fetching
+### AirQuality Component
+- Real-time air quality index (AQI)
+- Detailed pollutant information (PM2.5, PM10, O₃, NO₂)
+- Visual AQI indicator with color coding
+- Health recommendations based on AQI level
+
+### Additional Features
+- **Error Boundary**: Graceful error handling with recovery options
+- **API Caching**: Reduces API calls with intelligent caching (5 min for weather, 1 hour for air quality)
+- **Unit Toggle**: Switch between Celsius and Fahrenheit
+- **Temperature Chart**: Visual temperature trends using Recharts
+- **Dynamic Backgrounds**: Weather-appropriate gradient backgrounds
+- **PWA Support**: Installable as a Progressive Web App
+- **Accessibility**: Full keyboard navigation, ARIA labels, screen reader support
+- **Environment Validation**: Validates required environment variables
 
 ## API Integration
 
@@ -146,6 +203,22 @@ The dashboard is fully responsive with breakpoints for:
 - Firefox (latest)
 - Safari (latest)
 - Edge (latest)
+
+## PWA Icons Setup
+
+This app is configured as a Progressive Web App (PWA). To complete the setup, you need to add PWA icons. See `PWA_ICONS.md` for detailed instructions on creating and adding the required icon files.
+
+## Improvements Made
+
+This project has been enhanced with:
+- ✅ Error boundary for graceful error handling
+- ✅ API response caching to reduce API calls
+- ✅ Air quality integration
+- ✅ Comprehensive accessibility improvements (ARIA labels, keyboard navigation)
+- ✅ Environment variable validation
+- ✅ Unit tests with Jest and React Testing Library
+- ✅ Removed console.log statements from production code
+- ✅ Improved code organization and documentation
 
 ## License
 

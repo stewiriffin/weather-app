@@ -10,7 +10,9 @@ export default function UnitToggle() {
     <div className="flex items-center gap-2 bg-white/10 backdrop-blur-md rounded-full p-1 border border-white/20">
       <button
         onClick={toggleUnits}
-        className="relative px-4 py-2 rounded-full text-sm font-medium text-white transition-colors"
+        aria-label="Switch to Celsius"
+        aria-pressed={units === 'metric'}
+        className="relative px-4 py-2 rounded-full text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
       >
         {units === 'metric' && (
           <motion.div
@@ -23,7 +25,9 @@ export default function UnitToggle() {
       </button>
       <button
         onClick={toggleUnits}
-        className="relative px-4 py-2 rounded-full text-sm font-medium text-white transition-colors"
+        aria-label="Switch to Fahrenheit"
+        aria-pressed={units === 'imperial'}
+        className="relative px-4 py-2 rounded-full text-sm font-medium text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
       >
         {units === 'imperial' && (
           <motion.div
